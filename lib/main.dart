@@ -1,13 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Chats/Calls.dart';
 import 'Chats/Chats.dart';
 import 'Chats/Status.dart';
+import 'Chats/ios.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyApp(),
-  ));
+  runApp(
+    const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -37,7 +41,7 @@ class _homePageState extends State<MyApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //  drawer: DrawerPage(),
+      // drawer: DrawerPage(),
       appBar: AppBar(
         title: const Text(
           "WhatsApp",
@@ -51,15 +55,15 @@ class _homePageState extends State<MyApp> with SingleTickerProviderStateMixin {
                   switch1 = val;
                 });
               }),
-          Icon(Icons.camera_alt_outlined),
-          SizedBox(
+          const Icon(Icons.camera_alt_outlined),
+          const SizedBox(
             width: 20,
           ),
-          Icon(Icons.search_rounded),
-          SizedBox(
+          const Icon(Icons.search_rounded),
+          const SizedBox(
             width: 10,
           ),
-          Icon(Icons.more_vert),
+          const Icon(Icons.more_vert),
         ],
         bottom: TabBar(
           controller: controller,
@@ -69,10 +73,10 @@ class _homePageState extends State<MyApp> with SingleTickerProviderStateMixin {
           tabs: list
               .map(
                 (e) => Tab(
-                  text: e,
-                  // style: TextStyle(fontSize: 22),
-                ),
-              )
+              text: e,
+              // style: TextStyle(fontSize: 22),
+            ),
+          )
               .toList(),
         ),
         backgroundColor: Colors.teal,
@@ -82,17 +86,29 @@ class _homePageState extends State<MyApp> with SingleTickerProviderStateMixin {
         children: [
           const Padding(
             padding: const EdgeInsets.all(10),
-             child: Chats(),
+            child: Chats(),
           ),
           Container(
-             child: Status(),
+            child: const Status(),
             // color: Colors.amber,
             alignment: Alignment.center,
           ),
           Container(
-                child: Calls(),
-              ),
+            child: const Calls(),
+          ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const IOS(),
+            ),
+          );
+        },
+        child: const Icon(Icons.message),
+        backgroundColor: Colors.teal,
       ),
     );
   }
